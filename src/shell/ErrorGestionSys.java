@@ -1,4 +1,4 @@
-package Shell;
+package shell;
 /*	GESTIONNAIRES D'EXCEPTIONS
  *  
  *  @license MIT ( https://fr.wikipedia.org/wiki/Licence_MIT )
@@ -64,7 +64,7 @@ public class ErrorGestionSys {
 	public void gestionException(ArrayIndexOutOfBoundsException e){
 		System.out.println("ArrayIndexOutOfBoundsException : \n"+e.toString());
 		// TODO Exemple avec 'linterrogation d'une cellule hors d'un tableau
-		System.out.println("> Essayez de lire une cellule située DANS le tableau !\n");
+		System.out.println("> Essayez de lire une cellule située DANS le tableau !");
 	}	// Exceptions levée quand vous dépassez la taille d'un tableau
 	
 	public void gestionException(ArrayStoreException e){

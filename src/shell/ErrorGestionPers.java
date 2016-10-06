@@ -1,4 +1,4 @@
-package Shell;
+package shell;
 /*	GESTIONNAIRES D'EXCEPTIONS PERSONNALISÉES
  * 
  *  @license MIT ( https://fr.wikipedia.org/wiki/Licence_MIT )

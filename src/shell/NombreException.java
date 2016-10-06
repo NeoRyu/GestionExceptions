@@ -1,4 +1,4 @@
-package Shell;
+package shell;
 
 //Un petit exemple de classe d'exception personnalisée
 public class NombreException extends Exception {

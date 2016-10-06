@@ -1,4 +1,4 @@
-package Shell;
+package shell;
 /*
  * GESTIONNAIRE DE REDIRECTIONS D'EXCEPTIONS
  *	
@@ -252,13 +252,13 @@ public class ErrorRedirect {
 					ErrorSys.gestionException((AuthenticationException) ex);
 					break;		
 					
-					
+				/*	
 				// EXCEPTIONS PERSONNALISÉES :
 				case "NombreException" :
 					// TODO : Exemple d'une exception crée par un utilisateur pour des besoins spécifiques à son projet
 					ErrorSys.gestionException((NombreException) ex);
 					break;
-					
+				*/
 				
 				// SINON PAR DEFAUT : EXCEPTION
 				default :

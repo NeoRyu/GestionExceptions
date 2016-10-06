@@ -8,7 +8,8 @@ public class Principal {
 	
 	// Obtention des object associés à cette classe
 
-	public static boolean viewBloc = false;
+	public static boolean viewFatalError = false;
+	public static boolean viewBloc = false;	
 	public static ErrorRedirect Error;
 	
 	public static void main(String[] args) {
@@ -17,66 +18,39 @@ public class Principal {
 			
 			// CREATION D'ERREURS SUR DIVERS PACKAGE :
 			
-			test();		// JAVA.LANG.*Exception;
+			test3("");	// Exception Personnelle			
 			
-			test2();	// JAVA.IO.*Exception;
+			test2();	// JAVA IO *Exception;
 			
-			test3("");	// Exception Personnelle
+			test1();	// JAVA LANG *Exception;
+			
+			test0();	// JAVA LANG *Exception;
 			
 		} catch (Exception e) {
-			System.out.println("ERREUR MAIN !");
+			System.out.println("\nCALLBACK CATCH EXCEPTION : shell.Principal");
 			
 			shell.ErrorRedirect.Reflexivite();			
 			shell.ErrorRedirect.RedErreurs(e);
+			
+			System.out.println("Fermeture de l'application...");
 		}		
 	}
 	
 	
-	public static void test() {		// JAVA.LANG.*Exception;
-		System.out.println("\n--------------------------\nTEST 1");
+	// AUCUNE ERREUR DANS CETTE METHODE
+	public static void test0() {
+		System.out.println("\n--------------------------\nMETHODE 0");
 		try {
-			if (viewBloc) System.out.println("TRY");	
-			
-			// ArrayIndexOutOfBoundsException
-			int tab[] = new int[4];
-			for(int i = 0 ; i < 1 ; i++) {
-				i = i-1;
-				System.out.println(""+tab[10]);
-			}
-			
-			// Si l'erreur apparait comme prévue, le message suivant n'apparaitra pas :
-			System.out.println("\nCa roule mec ?\n");
-			
-		} catch (Exception e) {
-			if (viewBloc) System.out.println("CATCH");
-			
-			shell.ErrorRedirect.Reflexivite();			
-			shell.ErrorRedirect.RedErreurs(e,ErrorRedirect.c,ErrorRedirect.m);
+			if (viewBloc) 
+				System.out.println("TRY");		
 
-		} finally {	//Traitements pour terminer proprement
-			if (viewBloc) System.out.println("FINALLY");				
-		}
-		if (viewBloc) System.out.println("SORTIE DU BLOC TRY / CATCH !");
-	}
-	
-	
-	public static void test2() {	// JAVA.IO.*Exception;
-		System.out.println("\n--------------------------\nTEST 2");
-		try {
-			if (viewBloc) System.out.println("TRY");				
-			
-			// NoSuchMethodException
-			shell.ErrorRedirect.Reflexivite();
-			Method method = ErrorRedirect.c.getClass().getMethod(ErrorRedirect.c, null);
-			ErrorRedirect.m = method.getName().toString();
-			System.out.println(ErrorRedirect.m);  
-			
-			// Si l'erreur apparait comme prévue, le message suivant n'apparaitra pas :
-			System.out.println("\nCa roule mec ?\n");
+			System.out.println("\nICI TOUT CE PASSE BIEN !\n");
 			
 		} catch (Exception e) {
-			if (viewBloc) System.out.println("CATCH");
+			if (viewBloc) 
+				System.out.println("CATCH");
 			
+			// Divers moyen d'afficher le message d'erreur (surcharge de methode)
 			shell.ErrorRedirect.Reflexivite();			
 			if (ErrorRedirect.m != null && !ErrorRedirect.m.isEmpty())
 				shell.ErrorRedirect.RedErreurs(e,ErrorRedirect.c,ErrorRedirect.m);
@@ -88,16 +62,85 @@ public class Principal {
 		} 
 	}
 	
-	public static void test3(String chaine) throws NombreException {
-		System.out.println("\n--------------------------\nTEST 3");
+	// ERREURS DE TYPE : JAVA.LANG.*Exception;
+	public static void test1() {
+		System.out.println("\n--------------------------\nMETHODE 1");
+		int tab[] = new int[9];
 		try {
-			if (viewBloc) System.out.println("TRY");	
+			if (viewBloc) 
+				System.out.println("TRY");	
+			
+			// ArrayIndexOutOfBoundsException			
+			for(int i = 0 ; i < 1 ; i++) {
+				i = i-1;
+				System.out.println(""+tab[10]);
+			}
+			
+			// NoSuchMethodException
+			shell.ErrorRedirect.Reflexivite();
+			Method method = ErrorRedirect.c.getClass().getMethod(ErrorRedirect.c, null);
+			ErrorRedirect.m = method.getName().toString();
+			System.out.println(ErrorRedirect.m);  
+			
+			// Si une erreur apparait comme prévue, le message suivant n'apparaitra pas :
+			System.out.println("\nCa roule mec ?\n");
+			
+		} catch (Exception e) {
+			if (viewBloc) 
+				System.out.println("CATCH");
+			
+			shell.ErrorRedirect.Reflexivite();			
+			shell.ErrorRedirect.RedErreurs(e,ErrorRedirect.c,ErrorRedirect.m);
+			
+			// SI VOUS MODIFIEZ MAIS EN RECREANT UNE SECONDE ERREUR :
+			if (viewFatalError) 
+				System.out.println("RESULTAT : "+tab[9]);
+
+		} finally {	//Traitements pour terminer proprement
+			if (viewBloc) 
+				System.out.println("FINALLY");				
+		}
+		if (viewBloc) 
+			System.out.println("SORTIE DU BLOC TRY / CATCH !");
+	}
+	
+	// ERREUR DE TYPE JAVA.IO.*Exception;
+	public static void test2() {
+		System.out.println("\n--------------------------\nMETHODE 2");
+		try {
+			if (viewBloc) 
+				System.out.println("TRY");				
+			
+			// TODO : GENERER UNE ERREUR I/O ici (pourquoi pas serializable)
+			
+			
+			
+			// Si l'erreur apparait comme prévue, le message suivant n'apparaitra pas :
+			System.out.println("\nCa roule mec ?\n");
+			
+		} catch (Exception e) {
+			if (viewBloc) 
+				System.out.println("CATCH");
+			
+			shell.ErrorRedirect.Reflexivite();			
+			shell.ErrorRedirect.RedErreurs(e,ErrorRedirect.c,ErrorRedirect.m);
+
+		} 
+	}
+	
+	// ERREUR CUSTOM PAR LE DEVELOPPEUR	
+	public static void test3(String chaine) throws NombreException {
+		System.out.println("\n--------------------------\nMETHODE 3");
+		try {
+			if (viewBloc) 
+				System.out.println("TRY");	
 			
 			if (chaine.equals("") == true)
 				throw new NombreException("Nombre erronée : chaine vide !");
 			
 		} catch (Exception e) {
-			if (viewBloc) System.out.println("CATCH");
+			if (viewBloc) 
+				System.out.println("CATCH");
 			
 			shell.ErrorRedirect.Reflexivite();			
 			shell.ErrorRedirect.RedErreurs(e,ErrorRedirect.c,ErrorRedirect.m);
